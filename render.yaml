@@ -25,7 +25,10 @@ services:
     name: pixel-pos-downgrade-members
     runtime: go
     rootDir: backend
-    schedule: "0 20 1 * *"   # เที่ยงคืนวันที่ 1 ของทุกเดือน (เวลาไทย = UTC+7 → 20:00 UTC ของสิ้นเดือนก่อนหน้า)
+    # Render cron ใช้เวลา UTC เสมอ — วันที่ (day-of-month) ในช่อง cron อ้างอิงปฏิทิน UTC ไม่ใช่ปฏิทินไทย
+    # ถ้าตั้ง "day-of-month = 1" กับชั่วโมงไหนก็ได้ที่ >16 UTC จะข้ามไปตรงกับวันที่ 2 เวลาไทยแทน (ของเดิม "0 20 1 * *" = 03:00 น. วันที่ 2 เวลาไทย ผิดไป 1 วัน)
+    # ใช้ 00:00 UTC ของวันที่ 1 แทน = 07:00 น. เวลาไทย ของวันที่ 1 พอดี (ชั่วโมงเช้าสุดที่ day-of-month=1 แบบ UTC ยังตรงกับวันที่ 1 เวลาไทย)
+    schedule: "0 0 1 * *"   # 07:00 น. เวลาไทย ของวันที่ 1 ทุกเดือน
     buildCommand: go build -o app ./cmd/api
     startCommand: >
       curl -s -X POST https://pixel-pos-api.onrender.com/api/admin/downgrade-members
