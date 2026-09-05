@@ -22,6 +22,7 @@ func main() {
 	defer pool.Close()
 
 	r := gin.Default()
+		log.Printf("DEBUG: ALLOWED_ORIGIN = %q (length=%d)", cfg.AllowedOrigin, len(cfg.AllowedOrigin))
 
 	// CORS: อนุญาตเฉพาะโดเมน Firebase Hosting ของ frontend เท่านั้น
 r.Use(cors.New(cors.Config{
