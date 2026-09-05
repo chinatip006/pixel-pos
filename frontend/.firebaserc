@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "firebase init hosting:github": "pixelshop-pos",
+    "default": "pixelshop-pos"
+  },
+  "targets": {},
+  "etags": {}
+}
