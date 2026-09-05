@@ -13,6 +13,6 @@ jobs:
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_TOKEN }}
-          projectId: pixcel-pos 
+          projectId: pixel-pos 
           channelId: live
           entryPoint: frontend
